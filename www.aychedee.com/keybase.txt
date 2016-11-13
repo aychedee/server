@@ -1,0 +1,66 @@
+==================================================================
+https://keybase.io/hansel
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://www.aychedee.com
+  * I am hansel (https://keybase.io/hansel) on keybase.
+  * I have a public key with fingerprint 0FAB 8D01 5F59 F50D B5F2  1B39 391F 05C7 7331 1A40
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "0fab8d015f59f50db5f21b39391f05c773311a40",
+            "host": "keybase.io",
+            "key_id": "391f05c773311a40",
+            "uid": "41a6baf2db2e4e845ec80f66b299a900",
+            "username": "hansel"
+        },
+        "service": {
+            "hostname": "www.aychedee.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1397914225,
+    "expire_in": 157680000,
+    "prev": "ae8df810729447c426a346bb31825728558a6d6cc91e8b288d637137e1979911",
+    "seqno": 9,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v0.1.8
+Comment: https://keybase.io/crypto
+
+yMH1AnicbZFdSBxXHMV30yRtl7QEksaSWLMMFBGXzdyZufOxC/pi1aCWtkYNuLjM
+x511os6sM+Ou62KpVXyoFWs/RNRiBZEqaKJIGqQELUkwGmkhQbREIm6gNT74oNDg
+hurdxbzlvgz3/H/nnDv87733lsPlfDJPdBbfyfzfuTy/1+Qo/6KlMU5IhhIjfHGi
+DqU/qqaHkBk2Nd0mfASpihKvkACqUFAhqUhQpYBEC7QAVBLKHEfTAIgMSXiIWsNK
+OXCMJFrIqxlYw5egpmD1DXxTesAAkZVElVIkCjGIZyCSeVJlWYkSBFEg06CFTF1s
+QJiuFXUL1ROtHgJrEU3GWjxdfDyPRqNeMSbXIgUhr2w0YHfYNGxDNupTbtsO+1Jm
+OxZO00gKHucEJU1X8J9jQwSZlmbohA9gUra1VDCgBU4ADEVBD4Gaw5qJglqKgBzL
+k/ikalAER4qIV1QekBwlMAwnMxQr0gwrSTTgKchRPIS8yCqsLAsA8RLF8wpLc4Dm
+EMAFAgC430KNukH4BPxMMYQjLS2ki3aTiYjWP+YDJx1Ol+P0qROp3Tlc7559vdFz
+sbcPg5cz90P5bcxPxN9frX/j7n/+T4a/A5aNJxPNk7lFjy7+sFO9sZf3bfXX92s2
+Xq2OTK7+rve08FWf1B98BF8ka6x3Av7QqDjUO1ZScct+mV0pLzFbw4JTWcnMGXIX
+QfLZ0/zA6EH3wE5gtrJuu7AnWCptKH3vfzj9l3AVJO/uJq50X9L+vVAGVsa325zT
+17ZnyrM6ogM/biY/zf3z100+kesvKJzqa/58PR4sHRlu7F2OdI25+/vmqvaXvO0P
+Zn8b+dJds5vTOeVpX3hYsHbjs/HrJR9UFg9OdcHveHPuYHDi8PHaf3nfJ2bPbH28
+4MrOWpy4acPF2zMzGRU/+8//cgTufhbz
+=wXUH
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/hansel
+
+==================================================================
+

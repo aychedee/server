@@ -1,0 +1,31 @@
+--- 
+
+- name: Install squid
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - squid
+    - apache2-utils
+
+- name: Update squid.conf
+  copy:
+    src: squid.conf
+    dest: /etc/squid/squid.conf
+    mode: 0644
+  notify:
+    - restart squid
+
+- name: Add squid passwd file
+  copy:
+    src: squid_passwd
+    dest: /etc/squid/passwd
+    mode: 0600
+    owner: root
+  notify:
+    - restart squid
+
+
+    

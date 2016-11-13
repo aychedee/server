@@ -1,0 +1,55 @@
+--- 
+
+- name: Install uwsgi
+  pip:
+    name: "{{ item }}"
+  with_items:
+    - uwsgi
+    - flask
+    - markdown
+
+- name: Add www-user group
+  group: 
+    name: www-user
+
+- name: Add www-user user
+  user: 
+    name: www-user
+
+- name: Install uwsgi systemd service
+  copy:
+    src: emperor.uwsgi.service
+    dest: /etc/systemd/system/emperor.uwsgi.service
+
+- name: Sync interpretthis folder
+  synchronize:
+    src: ../www.interpretthis.org/
+    dest: /var/www/www.interpretthis.org/
+  notify:
+    - restart uwsgi
+
+- name: Update www.interpretthis.org nginx config
+  copy:
+    src: interpretthis.conf
+    dest: /etc/nginx/sites-enabled/www.interpretthis.org
+    mode: 0644
+  notify:
+    - restart nginx
+
+- name: Give permissions for www-user to folder
+  file:
+    path: /var/www/www.interpretthis.org
+    state: directory
+    mode: 0777
+    owner: www-user
+    group: www-user
+  notify:
+    - restart uwsgi
+
+- name: Give permissions for logging file
+  file:
+    path: /var/log/interpretthis.org.log
+    state: touch
+    mode: 0644
+    owner: www-user
+    group: www-user

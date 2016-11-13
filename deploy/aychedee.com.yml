@@ -1,0 +1,35 @@
+--- 
+
+- name: Create servable folders
+  file:
+    path: /var/www/www.aychedee.com/_build
+    state: directory
+
+- name: Sync built html
+  synchronize:
+    src: ../www.aychedee.com/_build/
+    dest: /var/www/www.aychedee.com/_build/
+
+- name: Sync presentations
+  synchronize:
+    src: ../www.aychedee.com/_presentations/
+    dest: /var/www/www.aychedee.com/_presentations/
+
+- name: Sync static files
+  synchronize:
+    src: ../www.aychedee.com/static/
+    dest: /var/www/www.aychedee.com/static/
+
+- name: Copy keybase file
+  copy:
+    src: ../www.aychedee.com/keybase.txt
+    dest: /var/www/www.aychedee.com/keybase.txt
+    mode: 0644
+
+- name: Update www.aychedee.com nginx config
+  copy:
+    src: aychedee.conf
+    dest: /etc/nginx/sites-enabled/www.aychedee.com
+    mode: 0644
+  notify:
+    - restart nginx

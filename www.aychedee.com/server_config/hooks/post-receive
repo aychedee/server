@@ -1,0 +1,12 @@
+#!/bin/sh
+SITE_NAME="aychedee.com"
+CONFIG_DIR="/srv/git/$SITE_NAME/server_config"
+GIT_WORK_TREE=/srv/git/$SITE_NAME git checkout -f 
+echo "Copying nginx virtualhost config"
+sudo cp $CONFIG_DIR/etc/nginx/sites-available/www.$SITE_NAME /etc/nginx/sites-available/
+echo "Copying post recieve hook"
+cp $CONFIG_DIR/hooks/post-receive /srv/git/www.$SITE_NAME.git/hooks/post-receive
+cd /srv/git/$SITE_NAME
+rm -rf _build
+run-rstblog build
+echo "Built web site www.$SITE_NAME." 

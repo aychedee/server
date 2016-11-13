@@ -1,0 +1,14 @@
+/ * Author */ 
+
+    Hansel Dunlop - Software Engineer 
+    Github: https://github.com/aychedee
+    Twitter: @hanseldunlop
+    Working on: https://www.pythonanywhere.com, http://www.rogueshell.com
+    Location: London, United Kingdom
+
+/* With thanks */
+
+    Jennifer Trak - Bon ami
+    Always pinning: http://pinterest.com/ieatbuttons/
+    Location: London, United Kingdom
+

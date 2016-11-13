@@ -1,0 +1,17 @@
+--- 
+
+- name: Install nginx
+  apt:
+    name: nginx
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Update nginx.conf
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+  notify:
+    - restart nginx
+ 
+

@@ -1,0 +1,44 @@
+server {
+
+    listen 80;
+    server_name .interpretthis.org;
+
+    location / {
+
+        include uwsgi_params;
+        uwsgi_pass unix:/var/www/socket/www.interpretthis.org.socket;
+
+    }
+
+    location /static {
+
+        alias /srv/www/www.interpretthis.org/static/;
+        access_log off;
+        autoindex on;
+
+    }
+
+    location /interpretthis_rss.xml {
+
+        alias /srv/www/www.interpretthis.org/rss/interpretthis_rss.xml;
+        access_log off;
+        autoindex on;
+
+    }
+
+    location /favicon.ico { 
+
+        alias /srv/www/www.interpretthis.org/static/favicon.ico;
+        access_log off;
+    }
+
+    location /robots.txt { 
+
+        alias /srv/www/www.interpretthis.org/static/robots.txt;
+        access_log off;
+    }
+
+    access_log /var/log/nginx/www.interpretthis.org.access.log;
+    error_log /var/log/nginx/www.interpretthis.org.example.error.log;	
+
+}

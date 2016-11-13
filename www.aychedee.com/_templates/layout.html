@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset=utf-8>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="/feed.atom" feed="alternate" title="Feed" type="application/atom+xml">
+    <link href="http://fonts.googleapis.com/css?family=Abril+Fatface" rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+    <link href="/static/aychedee.css" rel="stylesheet" type="text/css">
+    <link href="/static/pygment.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-26592552-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
+</head>
+<body>
+    <div id="banner"><h1>aychedee</h1></div>
+<div id="content" class="center-column">
+    <ul id="menu">
+        <li><a href="/">home</a></li>
+        <li><a href="/archive/">archive</a></li>
+        <li><a href="/tags/">tags</a></li>
+        <li><a href="/about/">about</a></li>
+    </ul>
+
+{% block body %}{% endblock %}
+</div>
+<footer class="center-column">
+<b>About Hansel</b><br />
+Web/software developer - working on <a href="https://www.getmetric.com">Metric</a>
+and creator of <a href="http://www.rogueshell.com">Browser based Rogue Likes (www.RogueShell.com)</a>.<br />
+Follow me on twitter <a href="https://twitter.com/hanseldunlop">@hanseldunlop</a>.
+<g:plus href="https://plus.google.com/110898729885650715526" rel="author" width="300" height="69"></g:plus>
+<br />
+<br />
+
+</footer>
+</body>
+</html>
+        
+

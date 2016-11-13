@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Isolating the Django ORM</title>
+
+		<meta name="description" content="Isolating the Django ORM">
+		<meta name="author" content="Hansel Dunlop">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+        <style>
+            #twitter-logo {
+                box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+                border: 0 ;
+                padding: 20px 10px 0px 5px;
+                margin-top: 30px;
+                margin-bottom: 0px;
+                border-shadow: none;
+        }
+            pre code {
+                background: #fff;
+                color: #222;
+                box-shadow: none;
+        }
+            .reveal pre {
+                box-shadow: none;
+        }
+            pre .title {
+                color: #1227C7;
+        }
+            pre .keyword {
+                color: #1934FC;
+                font-weight: bold;
+        }
+            pre .python .decorator {
+                color: #006E21;
+                font-weight: bold;
+        }
+        </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Isolating the Django ORM</h1>
+                    <br />
+                    <h3>Teasing out your application and putting it somewhere</h3>
+					<p>
+                        <small>by Hansel, Lead Developer at <a href="http://metric.io">Metric.io</a> / <bold><a href="http://twitter.com/hanseldunlop">@hanseldunlop</a></bold></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>
+                        Why would you do this?
+                    </h2>
+					<ul>
+						<li>Easier testing</li>
+						<li>Finding your application</li>
+						<li>A human friendly interface</li>
+					</ul>
+				</section>
+
+				<section>
+                    <h2>Entities</h2>
+
+                    <pre><code>
+class BaseEntity(object):
+    def __init__(self, adaptor=None):
+        if not adaptor:
+            adaptor = self.default_adaptor
+        self._adaptor = adaptor()
+
+
+class Account(BaseEntity):
+    default_adaptor = models.StorageAdaptor
+
+    @classmethod
+    def get_from_team_email(cls, email):
+        account = cls()
+        return account._adaptor.get_via_email(email)
+                    </code></pre>
+
+                    <p>
+                        Don't have to be one to one mappings against tables 
+                        in your database    
+                    </p>
+                    <p>
+                        Can be initalised with a different adaptor if you want to 
+                        save to disk, emit JSON, publish to redis, or for testing 
+                    </p>
+
+				</section>
+
+
+				<section>
+					<h2>Storage Adaptors</h2>
+
+                    <pre><code>
+    
+app.models import AppAdaptor
+app.entities import Account
+
+def account_view(request):
+    return render(
+        request, 'account.html', dict(
+            account=Account(adaptor=AppAdaptor).get_via_email(
+                request.user.email)))
+                    </code></pre>
+
+					<ul>
+						<li>Live in models.py</li>
+						<li>Are only used by entities</li>
+						<li>Abstract away anything Django ORM specific</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h2>Templates?</h2>
+					<ul>
+						<li>Trying to keep logic out of templates</li>
+						<li>Entities only emit primitive types</li>
+						<li>Helpful for dealing with JS frontends</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h2>How far could you take this?</h2>
+					<ul>
+						<li>Django web framework imports your app not vice versa</li>
+						<li>Easier to break things out into micro services</li>
+						<li>Different Django apps for your API and Human interfaces</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h2>References</h2>
+					<ul>
+                        <li><a href="http://alistair.cockburn.us/Hexagonal+architecture">Hexagonal Architecture by Alistair Cockburn</a></li>
+                        <li><a href="http://blog.8thlight.com/uncle-bob/2014/05/11/FrameworkBound.html">Framework Bound</a> 
+                            and <a href="http://blog.8thlight.com/uncle-bob/2012/08/13/the-clean-architecture.html">The Clean Architecture</a> 
+                            both by 'Uncle' Bob Martin</a></li>
+                        <li><a href="http://www.threeriversinstitute.org/blog/?p=338">To Design or Not To Design?</a> by Kent Beck</a></li>
+					</ul>
+
+				</section>
+
+				<section>
+					<h1>Questions?</h1>
+                    <br />
+                    <a href="https://twitter.com/hanseldunlop" style="font-style: italic;">
+                        <img id="twitter-logo" class="twitter-logo" width="5%" height="5%" src="/static/Twitter_logo_blue.png" />
+                        @hanseldunlop
+                    </a>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

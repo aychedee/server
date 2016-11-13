@@ -1,0 +1,9 @@
+---
+active_modules: [pygments, tags, blog]
+author: aychedee
+canonical_url: http://www.aychedee.com
+modules:
+    pygments:
+        style: friendly
+feed:
+    name: www.aychedee.com - Dev blog for Hansel Dunlop

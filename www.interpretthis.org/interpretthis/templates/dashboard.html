@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+    {% if username %}
+        <p>logged in as {{ username }}</p>
+    {% else %}
+        <p>Not logged in</p>
+    {% endif %}
+
+    <a href="/btsync">BtSync</a>
+
+    <div style="display: none;" id="authenticate" class="dialog">
+        <form action="/authenticate" method="post" autocomplete="on">
+            <input name="username" type="text" placeholder="Identification" autofocus>
+            <input name="password" type="password" placeholder="Secret">
+            <input type="submit" value="Authenticate">
+        </form>
+
+    </div>
+
+    <div style="display: none;" id="register" class="dialog">
+        <form action="/register" method="post" autocomplete="on">
+            <input name="username" type="text" placeholder="Identification" autofocus>
+            <input name="email" type="email" placeholder="Email">
+            <input name="password" type="password" placeholder="Secret">
+            <input name="confirm-password" type="password" placeholder="Confirm Secret">
+            <input type="submit" value="Authenticate">
+        </form>
+
+    </div>
+{% endblock %}
