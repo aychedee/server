@@ -16,7 +16,7 @@ Once they won the [first browser war][2] they moved on and stopped caring. It
 would be **5 years and 2 months** after the release of IE6 that Microsoft
 released IE7. 
 
- ![Forever is a long time](http://www.interpretthis.org/static/images/baby+jane.jpg "Forever is a long time")
+ ![Forever is a long time](https://www.interpretthis.org/static/images/baby+jane.jpg "Forever is a long time")
 
 * *(Baby Jane (IE6), and Blanche (Netscape Navigator) at the beach)*
 
@@ -66,12 +66,12 @@ this backwards compatible. Phew!
  [2]: http://en.wikipedia.org/wiki/Browser_wars#The_first_browser_war
  [3]: http://ibiblio.org/team/history/evolution/browser.html
  [4]: http://www.microsoft.com/en-us/news/presskits/mobilefirstcloudfirstpressbriefing/topstories.aspx
- [5]: http://www.interpretthis.org/2013/09/03/canadian-cuckoo-rips-apart-finlands-nest-egg
+ [5]: https://www.interpretthis.org/2013/09/03/canadian-cuckoo-rips-apart-finlands-nest-egg
  [6]: http://www.sitepoint.com/browser-trends-april-2014-signs-stability/
  [7]: http://www.imdb.com/title/tt0056687/
  [8]: https://www.google.co.uk/finance?chdnp=1&chdd=1&chds=1&chdv=1&chvs=maximized&chdeh=0&chfdeh=0&chdet=1397814947458&chddm=2810508&chls=IntervalBasedLine&cmpto=NYSE:IBM&cmptdms=0&q=NASDAQ:MSFT&ntsp=1&ei=ivZQU9iJD4aCwAP4nAE
  [9]: http://blogs.msdn.com/b/ie/archive/2015/01/22/project-spartan-and-the-windows-10-january-preview-build.aspx
- [100]: http://www.interpretthis.org/2014/04/11/whatever-happened-to-baby-ie
+ [100]: https://www.interpretthis.org/2014/04/11/whatever-happened-to-baby-ie
 
 
  [^1]: Okay, that is a bit hyperbolic. [Microsoft will always be with us, like

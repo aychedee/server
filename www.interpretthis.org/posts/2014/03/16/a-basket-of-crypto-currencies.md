@@ -15,7 +15,7 @@ client. Some guy called [Matt will even do it for you for 0.10 BTC][1]
 (AKA process transactions) with it, and exchange its output for things that you 
 value. 
 
- ![Crypto currency market cap excluding litecoin and bitcoin](http://www.interpretthis.org/static/images/excbtcltc.png "Crypto currency market cap excluding litecoin and bitcoin")
+ ![Crypto currency market cap excluding litecoin and bitcoin](https://www.interpretthis.org/static/images/excbtcltc.png "Crypto currency market cap excluding litecoin and bitcoin")
 
 *(Graph taken from the [Coin Stat blog][2], data from January 2014)*
 

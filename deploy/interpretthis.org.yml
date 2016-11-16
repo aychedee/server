@@ -28,6 +28,13 @@
   notify:
     - restart uwsgi
 
+- name: create letsencrypt challenge folder
+  file:
+    path: /var/www/www.interpretthis.org/static/acme-challenge/;
+    owner: www-user
+    mode: 0755
+    state: directory
+
 - name: Update www.interpretthis.org nginx config
   copy:
     src: interpretthis.conf
@@ -53,3 +60,40 @@
     mode: 0644
     owner: www-user
     group: www-user
+
+- name: Generate key/CSR for interpretthis.org
+  command: openssl req -nodes -newkey rsa:2048 -keyout /etc/ssl/private/interpretthis.org.key -out /etc/ssl/csr/interpretthis.org.csr -subj "/C=GB/ST=Greater London/L=London/O=aychedee/OU=Web Infrastructure/CN=www.interpretthis.org"
+  args:
+      creates: /etc/ssl/csr/interpretthis.org.csr
+
+- name: Generate letsencrypt account key for interpretthis.org
+  command: openssl genrsa -out /etc/ssl/private/interpretthis.org.account.key
+  args:
+      creates: /etc/ssl/private/interpretthis.org.account.key
+
+- name: Get challenge information from letsencrypt
+  letsencrypt:
+    acme_directory: https://acme-v01.api.letsencrypt.org/directory
+    account_key: /etc/ssl/private/interpretthis.org.account.key
+    csr: /etc/ssl/csr/interpretthis.org.csr
+    dest: /etc/ssl/certs/interpretthis.org.pem
+  register: interpretthis_org_challenge
+
+- name: Display challenge variable
+  debug: msg={{ interpretthis_org_challenge }}
+
+- name: Copy challenge variable from letsencrypt
+  copy:
+    dest: /var/www/www.interpretthis.org/static/acme-challenge/{{ interpretthis_org_challenge['challenge_data']['www.interpretthis.org']['http-01']['resource'].split('/')[-1] }}
+    content: "{{ interpretthis_org_challenge['challenge_data']['www.interpretthis.org']['http-01']['resource_value'] }}"
+  when: interpretthis_org_challenge|changed
+
+- name: Setup ssl certificate
+  letsencrypt:
+    acme_directory: https://acme-v01.api.letsencrypt.org/directory
+    account_key: /etc/ssl/private/interpretthis.org.account.key
+    csr: /etc/ssl/csr/interpretthis.org.csr
+    dest: /etc/ssl/certs/interpretthis.org.pem
+    data: "{{ interpretthis_org_challenge }}"
+  notify:
+    - restart nginx

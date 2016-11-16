@@ -32,7 +32,7 @@ They are using them to replace cigarettes. Regulate them like tobacco if you
 have to. But it seems absurd to make a safer alternative harder to get when you
 can still buy a pack of cigarettes in every corner store. 
 
- ![Nobody says no to Mr Butts](http://www.interpretthis.org/static/images/the-origin-of-mr-butts.gif "Nobody says no to Mr Butts title")
+ ![Nobody says no to Mr Butts](https://www.interpretthis.org/static/images/the-origin-of-mr-butts.gif "Nobody says no to Mr Butts title")
 
 Sure, the idea of allowing a new, highly addictive, consumer product onto the
 market probably seems appalling to lots of people. But you have to put it into

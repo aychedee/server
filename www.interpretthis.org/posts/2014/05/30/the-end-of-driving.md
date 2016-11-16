@@ -20,7 +20,7 @@ reasonably well paid jobs that requires minimal skills. And you get a sense of
 freedom. This entire class of jobs is going to vanish, starting in 10 years. That
 includes taxi, courier, truck, bus, train, delivery, etc. You know: DRIVERS.
 
- ![French taxi drivers protest Uber](http://www.interpretthis.org/static/images/frenchtaxiprotest.png "French taxi driver's protest Uber")
+ ![French taxi drivers protest Uber](https://www.interpretthis.org/static/images/frenchtaxiprotest.png "French taxi driver's protest Uber")
 
 Above are some French taxi drivers protesting Uber. They're worried about a 
 company coming in and lowering their wages. Wait until the other shoe drops and
@@ -66,7 +66,7 @@ Model T came onto the scene 102 years ago and we all went nuts for cars. When
 it happens it is going to happen really fast. The economics just make so
 much sense. [Hello JohnnyCab!][4]
 
- ![Total Recall JohnnyCab](http://www.interpretthis.org/static/images/JohnnyCab.jpg "Total Recall JohnnyCab")
+ ![Total Recall JohnnyCab](https://www.interpretthis.org/static/images/JohnnyCab.jpg "Total Recall JohnnyCab")
 
  [0]: http://recode.net/2014/05/28/uber-ceo-self-driving-cars-are-the-future-drivers-are-not-2/
  [1]: http://www.teslamotors.com/roadster/technology/motor

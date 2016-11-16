@@ -22,7 +22,7 @@ are slightly odd outsiders.
  [0]: http://www.imdb.com/title/tt0106179/
  [1]: http://tvtropes.org/pmwiki/pmwiki.php/Main/MonsterOfTheWeek
  [2]: http://www.imdb.com/title/tt1119644/
- [truth]: http://www.interpretthis.org/static/images/the-truth-is-out-there.jpg
+ [truth]: https://www.interpretthis.org/static/images/the-truth-is-out-there.jpg
 
 However one major difference that jumps out when you compare them is the huge
 amount of torture that happens in Fringe compared to the X-Files. 
@@ -35,7 +35,7 @@ it is appropriate. Why wouldn't you pull that tool out if you needed it? In fact
 it is often portrayed as a moral failing to not do anything it takes to get the
 results you need. 
 
- [fringe-torture]: http://www.interpretthis.org/static/images/fringe-torture-scene.png
+ [fringe-torture]: https://www.interpretthis.org/static/images/fringe-torture-scene.png
 
 Torture is used by all parties. Everyone resorts to torture, whether they are 
 the good guys or the bad guys. Because torture is not seen as objectively bad.

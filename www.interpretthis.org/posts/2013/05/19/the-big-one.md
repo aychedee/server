@@ -8,7 +8,7 @@ below:
  [0]: http://www.calculatedriskblog.com/2013/05/when-will-payroll-employment-exceed-pre.html
 
 
- ![Months till return to peak employment for post war recessions](http://www.interpretthis.org/static/ProjectionPayroll-resized.jpg)
+ ![Months till return to peak employment for post war recessions](https://www.interpretthis.org/static/ProjectionPayroll-resized.jpg)
 
 [Click here for full sized version][1].
 
