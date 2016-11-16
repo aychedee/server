@@ -27,5 +27,23 @@
   notify:
     - restart squid
 
+- name: Give permissions for proxy /var/log/squid
+  file:
+    path: /var/log/squid
+    state: directory
+    recurse: yes
+    mode: 0755
+    owner: proxy
+    group: proxy
+  notify:
+    - restart squid
 
-    
+- name: Give permissions for proxy to passwd
+  file:
+    path: /etc/squid/passwd
+    state: file
+    mode: 0600
+    owner: proxy
+    group: proxy
+  notify:
+    - restart squid

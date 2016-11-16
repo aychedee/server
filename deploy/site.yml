@@ -2,7 +2,9 @@
 
 - hosts: aychedee
   remote_user: ubuntu
-  sudo: yes
+  become: yes
+  become_user: root
+  become_method: sudo
   tasks:
     - include: common.yml
     - include: squid.yml
@@ -11,13 +13,12 @@
     - include: interpretthis.org.yml
 
   handlers:
+
     - name: restart squid
       service: name=squid state=restarted
 
-  handlers:
     - name: restart nginx
       service: name=nginx state=restarted
 
-  handlers:
     - name: restart uwsgi
       service: name=emperor.uwsgi.service state=restarted

@@ -5,6 +5,20 @@
     path: /var/www/www.aychedee.com/_build
     state: directory
 
+- name: Create csr folders
+  file:
+    path: /etc/ssl/csr
+    owner: www-user
+    mode: 0755
+    state: directory
+
+- name: Create certs folders
+  file:
+    path: /etc/ssl/certs
+    owner: www-user
+    mode: 0755
+    state: directory
+
 - name: Sync built html
   synchronize:
     src: ../www.aychedee.com/_build/
@@ -31,5 +45,42 @@
     src: aychedee.conf
     dest: /etc/nginx/sites-enabled/www.aychedee.com
     mode: 0644
+  notify:
+    - restart nginx
+
+- name: Generate key/CSR for aychedee.com
+  command: openssl req -nodes -newkey rsa:2048 -keyout /etc/ssl/private/aychedee.com.key -out /etc/ssl/csr/aychedee.com.csr -subj "/C=GB/ST=Greater London/L=London/O=aychedee/OU=Web Infrastructure/CN=www.aychedee.com"
+  args:
+      creates: /etc/ssl/csr/aychedee.com.csr
+
+- name: Generate letsencrypt account key for aychedee.com
+  command: openssl genrsa -out /etc/ssl/private/aychedee.com.account.key
+  args:
+      creates: /etc/ssl/private/aychedee.com.account.key
+
+- name: Get challenge information from letsencrypt
+  letsencrypt:
+    acme_directory: https://acme-v01.api.letsencrypt.org/directory
+    account_key: /etc/ssl/private/aychedee.com.account.key
+    csr: /etc/ssl/csr/aychedee.com.csr
+    dest: /etc/ssl/certs/aychedee.com.pem
+  register: aychedee_com_challenge
+
+- name: Debug challenge variable
+  debug: msg={{ aychedee_com_challenge }}
+
+- name: Copy challenge variable from letsencrypt
+  copy:
+    dest: /var/www/www.aychedee.com/static/acme-challenge/{{ aychedee_com_challenge['challenge_data']['www.aychedee.com']['http-01']['resource'].split('/')[-1] }}
+    content: "{{ aychedee_com_challenge['challenge_data']['www.aychedee.com']['http-01']['resource_value'] }}"
+  when: aychedee_com_challenge|changed
+
+- name: Setup ssl certificate
+  letsencrypt:
+    acme_directory: https://acme-v01.api.letsencrypt.org/directory
+    account_key: /etc/ssl/private/aychedee.com.account.key
+    csr: /etc/ssl/csr/aychedee.com.csr
+    dest: /etc/ssl/certs/aychedee.com.pem
+    data: "{{ aychedee_com_challenge }}"
   notify:
     - restart nginx
