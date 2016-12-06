@@ -1,0 +1,40 @@
+--- 
+
+- name: Install openvpn easy-rsa
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - pptpd
+
+- name: Enable IPV4 forwarding
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: 1
+    state: present
+
+- name: Enable NAT masquerade
+  iptables: 
+    table: nat
+    chain: POSTROUTING
+    out_interface: eth0 
+    jump: MASQUERADE 
+    state: present
+
+- name: Update pptpd.conf
+  copy:
+    src: pptpd.conf
+    dest: /etc/pptpd.conf
+    mode: 0644
+  notify:
+    - restart pptpd
+
+- name: Update pptpd-options
+  copy:
+    src: pptpd-options
+    dest: /etc/ppp/pptpd-options
+    mode: 0644
+  notify:
+    - restart pptpd
