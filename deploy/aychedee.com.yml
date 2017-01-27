@@ -19,6 +19,11 @@
     mode: 0755
     state: directory
 
+- name: Ensure we have large ephemeral key for nginx
+  command: openssl dhparam -out /etc/ssl/private/dhparam.pem 4098
+  args:
+      creates: /etc/ssl/private/dhparam.pem
+
 - name: Sync built html
   synchronize:
     src: ../www.aychedee.com/_build/

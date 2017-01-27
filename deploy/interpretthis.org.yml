@@ -28,6 +28,11 @@
   notify:
     - restart uwsgi
 
+- name: Ensure we have large ephemeral key for nginx
+  command: openssl dhparam -out /etc/ssl/dhparam.pem 4098
+  args:
+      creates: /etc/ssl/dhparam.pem
+
 - name: create letsencrypt challenge folder
   file:
     path: /var/www/www.interpretthis.org/static/acme-challenge/;

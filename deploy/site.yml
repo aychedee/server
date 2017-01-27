@@ -11,7 +11,9 @@
     - include: nginx.yml
     - include: vpn.yml
     - include: aychedee.com.yml
+      tags: [aychedee]
     - include: interpretthis.org.yml
+      tags: [interpretthis]
 
   handlers:
 
