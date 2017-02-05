@@ -2,6 +2,7 @@
 from flask import session, request, render_template
 from functools import partial
 import re
+import requests
 
 from interpretthis.blog import Post
 from interpretthis import app, constants, utilities
@@ -9,6 +10,12 @@ from interpretthis import app, constants, utilities
 app.secret_key = constants.SECRET_KEY
 app.logger.setLevel(constants.LOG_LEVEL)
 app.logger.addHandler(constants.LOG_HANDLER)
+
+
+PHOTO_DATA_URL = (
+    'https://s3.amazonaws.com/'
+    'photos.interpretthis.org/feed.json'
+)
 
 
 @app.route('/')
@@ -28,6 +35,12 @@ def root():
         if request.remote_addr == session['address']:
             return render_root(username=username, addr=session['address'])
     return render_root()
+
+
+@app.route('/feed', methods=['GET'])
+def photofeed():
+    feed = requests.get(PHOTO_DATA_URL).json()
+    return render_template('photofeed.html', feed=feed)
 
 
 @app.route('/btsync')

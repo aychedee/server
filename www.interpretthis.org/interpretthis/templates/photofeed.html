@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Photo feed{% endblock %}
+{% block content %}
+
+<div id="content">
+    <div class="photo">
+        <h1>Photo feed</h1>
+    </div>
+    {% for photo in feed %}
+    <div class="photo">
+        <img 
+            src="https://s3.amazonaws.com/photos.interpretthis.org/{{ photo.assets['1280']['path'] }}" 
+            srcset="{% for asset in photo.assets.values() %}https://s3.amazonaws.com/photos.interpretthis.org/{{ asset['path'] }} {{ asset['width'] }}w{% if not loop.last %},{% endif %}{% endfor %}" 
+            sizes="(min-width: 1440px) 60vw, 80vw"
+            alt="{{ photo.location }} @ {{ photo.taken }}"
+            title="{{ photo.location }} @ {{ photo.taken }}"
+        >
+        <p class="caption">{{ photo.location }} @ {{ photo.taken }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

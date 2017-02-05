@@ -1,3 +1,8 @@
+@font-face{ 
+    font-family: 'LeagueGothic';
+    src: url('https://www.interpretthis.org/static/leaguegothic-regular-webfont.woff') format('woff')
+}
+
 h1, h2, h3, h4, h5 {
   font-size: 2.5em;
   font-family: "PT Sans", monospace;
@@ -28,6 +33,19 @@ h1, h2, h3, h4, h5 {
   text-decoration: none;
   color: black; }
 
+.caption {
+    text-transform: uppercase;
+    margin-top: 5px; 
+    margin-bottom: 5px;
+    font-size: 80%;
+    font-family: "LeagueGothic", monospace;
+}
+
+.photo {
+    margin-top: 30px; 
+    margin-bottom: 5px;
+}
+
 body {
   margin: 0em;
   padding: 0em; }
@@ -54,6 +72,12 @@ body {
 
 .post {
   border-bottom: 1px solid black;
+  padding: 0px;
+  margin: 0px;
+  line-height: 1.5em;
+  margin: 1em 1.3em 1em 1.3em; }
+
+.photo {
   padding: 0px;
   margin: 0px;
   line-height: 1.5em;
@@ -133,3 +157,4 @@ footer {
   z-index: -1;
   background-color: black;
   background: rgba(25, 25, 25, 0.6); }
+

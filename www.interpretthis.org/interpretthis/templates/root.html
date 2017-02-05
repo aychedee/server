@@ -3,17 +3,17 @@
 
 {% block content %}
 
-    <div id="content">
-        {% for post in posts %}
-            <div class="post">
-                {{ post.html|safe }}
-                <p class="monogram"><a href="{{ post.post_url }}">{{ post.author }} - {{ post.date }}</a></p>
-            </div>
-        {% endfor %}
+<div id="content">
+    {% for post in posts %}
+        <div class="post">
+            {{ post.html|safe }}
+            <p class="monogram"><a href="{{ post.post_url }}">{{ post.author }} - {{ post.date }}</a></p>
+        </div>
+    {% endfor %}
 
-        {% if at_end %}
-            <div class="further-posts"><a href="/?begin={{ begin }}&end={{ end }}">Read more posts</a></div>
-        {% endif %}
-    </div>
+    {% if at_end %}
+        <div class="further-posts"><a href="/?begin={{ begin }}&end={{ end }}">Read more posts</a></div>
+    {% endif %}
+</div>
 
 {% endblock %}

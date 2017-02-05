@@ -4,6 +4,9 @@
   pip:
     name: "{{ item }}"
   with_items:
+    - boto3
+    - pillow
+    - requests
     - uwsgi
     - flask
     - markdown
