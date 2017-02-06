@@ -94,7 +94,7 @@ def get_feed(dbx):
             Photo(p['location'], p['taken'], p['assets']) for p
             in response.json()
         ]
-    return []
+    raise Exception('Could not get feed, aborting')
 
 
 def asset_dict(img, path):
