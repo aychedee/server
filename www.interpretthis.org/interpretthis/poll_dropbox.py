@@ -137,10 +137,13 @@ def run():
         if not type(pmd) is files.PhotoMetadata:
             continue
 
-        address = get_best_address(
-            pmd.location.latitude,
-            pmd.location.longitude
-        )
+        if pmd.location:
+            address = get_best_address(
+                pmd.location.latitude,
+                pmd.location.longitude
+            )
+        else:
+            address = 'Unknown'
         taken = pmd.time_taken
         assets = {}
 
