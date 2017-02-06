@@ -6,18 +6,82 @@
     <div class="photo">
         <h1>Photo feed</h1>
     </div>
-    {% for photo in feed %}
-    <div class="photo">
+    {% for photo in feed[:3] %}
+    <div class="photo" data-index="{{ loop.index0 }}">
         <img 
             src="https://s3.amazonaws.com/photos.interpretthis.org/{{ photo.assets['1280']['path'] }}" 
             srcset="{% for asset in photo.assets.values() %}https://s3.amazonaws.com/photos.interpretthis.org/{{ asset['path'] }} {{ asset['width'] }}w{% if not loop.last %},{% endif %}{% endfor %}" 
             sizes="(min-width: 1440px) 60vw, 80vw"
-            alt="{{ photo.location }} @ {{ photo.taken }}"
-            title="{{ photo.location }} @ {{ photo.taken }}"
+            alt="{{ photo.location }} @ {{ photo.taken.strftime('%-I%p %A, %-d %B %Y') }}"
+            title="{{ photo.location }} @ {{ photo.taken.strftime('%-I%p %A, %-d %B %Y') }}"
         >
-        <p class="caption">{{ photo.location }} @ {{ photo.taken }}</p>
+        <p class="caption">{{ photo.location }} @ {{ photo.taken.strftime('%-I%p %A, %-d %B %Y') }}</p>
     </div>
     {% endfor %}
 </div>
+
+<script>
+
+function assetUrl(asset) {
+    return 'https://s3.amazonaws.com/photos.interpretthis.org/' + asset.path;
+}
+
+function buildSrcset(assets) {
+    var srcset = '';
+    for (var width in assets) {
+        srcset = srcset + assetUrl(assets[width]) + ' ' + assets[width].width + 'w,';
+    }
+    return srcset.slice(0, -1);
+}
+
+function photoTitle(photo) {
+    return photo.location + ' @ ' + moment(photo.taken).format('hA dddd, D MMMM, YYYY');
+}
+
+function appendPhoto(photo, index) {
+    var div = document.createElement('div');
+    var img = document.createElement('img');
+    var caption = document.createElement('p');
+    img.src = assetUrl(photo.assets['1280'].path);
+    img.srcset=buildSrcset(photo.assets);
+    img.sizes = "(min-width: 1440px) 60vw, 80vw";
+    img.alt = photoTitle(photo);
+    img.title = photoTitle(photo);
+    caption.className = 'caption';
+    div.className = 'photo label'; 
+    div.setAttribute('data-index', index);
+    caption.textContent = photoTitle(photo);
+
+    div.appendChild(img);
+    div.appendChild(caption);
+
+    document.getElementById('content').appendChild(div);
+    return div;
+}
+
+function checkAtLastPhoto(event) {
+    var bottomPhoto = document.querySelector('div[data-index="' + index + '"]');
+    if (bottomPhoto === null) {
+        // we're at the bottom, nothing more to load
+        return;
+    }
+    if (window.innerHeight - bottomPhoto.getBoundingClientRect().top > 0) {
+        index = parseInt(index) + 1;
+        appendPhoto(feed[index], index);
+    }
+    
+}
+
+
+window.setTimeout(
+    function() {
+        window.onscroll = checkAtLastPhoto;
+    }, 500
+)
+
+var index = 2;
+var feed = {{ feed_json | safe }};
+
+</script>
 
 {% endblock %}

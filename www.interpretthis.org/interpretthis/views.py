@@ -1,4 +1,4 @@
-
+from datetime import datetime
 from flask import session, request, render_template
 from functools import partial
 import re
@@ -39,8 +39,15 @@ def root():
 
 @app.route('/feed', methods=['GET'])
 def photofeed():
-    feed = requests.get(PHOTO_DATA_URL).json()
-    return render_template('photofeed.html', feed=feed)
+    response = requests.get(PHOTO_DATA_URL)
+    feed = response.json()
+    for photo in feed:
+        photo['taken'] = datetime.strptime(photo['taken'], '%Y-%m-%d %H:%M:%S')
+    return render_template(
+        'photofeed.html',
+        feed=feed,
+        feed_json=response.content
+    )
 
 
 @app.route('/btsync')
