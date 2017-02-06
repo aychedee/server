@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from PIL import Image
 from cStringIO import StringIO
 from datetime import datetime
@@ -22,6 +24,10 @@ REVERSE_GEOCODE_URL = (
     '/maps/api/geocode/json?latlng={lat},{lon}'
 )
 
+PHOTO_DATA_URL = (
+    'https://s3.amazonaws.com/'
+    'photos.interpretthis.org/feed.json'
+)
 
 
 def save_image(img):
@@ -82,13 +88,13 @@ def get_best_address(lat, lon):
 
 
 def get_feed(dbx):
-    try:
+    response = requests.get(PHOTO_DATA_URL)
+    if response.status_code == 200:
         return [
             Photo(p['location'], p['taken'], p['assets']) for p
-            in json.loads(dbx.files_download('/feed.json')[1].content)
+            in response.json()
         ]
-    except exceptions.ApiError:
-        return []
+    return []
 
 
 def asset_dict(img, path):

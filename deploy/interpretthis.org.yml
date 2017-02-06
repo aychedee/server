@@ -5,11 +5,12 @@
     name: "{{ item }}"
   with_items:
     - boto3
+    - dropbox
+    - flask
+    - markdown
     - pillow
     - requests
     - uwsgi
-    - flask
-    - markdown
 
 - name: Add www-user group
   group: 
