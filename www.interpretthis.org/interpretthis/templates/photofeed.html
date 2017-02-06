@@ -66,12 +66,13 @@ function checkAtLastPhoto(event) {
         return;
     }
     if (window.innerHeight - bottomPhoto.getBoundingClientRect().top > 0) {
-        index = parseInt(index) + 1;
-        appendPhoto(feed[index], index);
+        if (index < feed.length - 1) {
+            index = parseInt(index) + 1;
+            appendPhoto(feed[index], index);
+        }
     }
     
 }
-
 
 window.setTimeout(
     function() {
