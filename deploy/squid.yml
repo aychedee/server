@@ -24,8 +24,7 @@
     dest: /etc/squid/passwd
     mode: 0600
     owner: root
-  notify:
-    - restart squid
+  changed_when: False
 
 - name: Give permissions for proxy /var/log/squid
   file:
@@ -35,8 +34,7 @@
     mode: 0755
     owner: proxy
     group: proxy
-  notify:
-    - restart squid
+  changed_when: False
 
 - name: Give permissions for proxy to passwd
   file:
@@ -45,5 +43,4 @@
     mode: 0600
     owner: proxy
     group: proxy
-  notify:
-    - restart squid
+  changed_when: False

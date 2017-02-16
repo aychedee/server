@@ -89,3 +89,17 @@
     data: "{{ aychedee_com_challenge }}"
   notify:
     - restart nginx
+
+- name: Put letsencrypts certificate chain into place
+  file: 
+    dest: /etc/ssl/certs/lets-encrypt-x3-cross-signed.pem
+    src: lets-encrypt-x3-cross-signed.pem
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Created chained certificate 
+  shell: cat /etc/ssl/certs/aychedee.com.pem /etc/ssl/certs/lets-encrypt-x3-cross-signed.pem  > /etc/ssl/certs/aychedee.com.chained.pem
+  when: aychedee_com_challenge|changed
+  changed_when: False
+

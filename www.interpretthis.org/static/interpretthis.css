@@ -135,6 +135,21 @@ header h2 {
   color: white;
   font-family: "PT Sans", monospace; }
 
+#signin-text a {
+  color: white; 
+  text-decoration: none;
+}
+
+#signin-text a:visited {
+  color: white; 
+  text-decoration: none;
+}
+
+#signin-text a:hover {
+  color: white; }
+  text-decoration: underline;
+
+
 #signin-text:hover {
   cursor: pointer; }
 

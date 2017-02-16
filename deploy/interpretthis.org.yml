@@ -29,8 +29,12 @@
   synchronize:
     src: ../www.interpretthis.org/
     dest: /var/www/www.interpretthis.org/
-  notify:
-    - restart uwsgi
+    archive: no 
+    links: yes 
+    perms: yes 
+    recursive: yes 
+    times: yes 
+    checksum: yes
 
 - name: Ensure we have large ephemeral key for nginx
   command: openssl dhparam -out /etc/ssl/dhparam.pem 4098
@@ -59,6 +63,7 @@
     mode: 0777
     owner: www-user
     group: www-user
+  changed_when: False
   notify:
     - restart uwsgi
 
@@ -69,6 +74,7 @@
     mode: 0644
     owner: www-user
     group: www-user
+  changed_when: False
 
 - name: Generate key/CSR for interpretthis.org
   command: openssl req -nodes -newkey rsa:2048 -keyout /etc/ssl/private/interpretthis.org.key -out /etc/ssl/csr/interpretthis.org.csr -subj "/C=GB/ST=Greater London/L=London/O=aychedee/OU=Web Infrastructure/CN=www.interpretthis.org"
@@ -106,3 +112,17 @@
     data: "{{ interpretthis_org_challenge }}"
   notify:
     - restart nginx
+
+- name: Put letsencrypts certificate chain into place
+  file: 
+    dest: /etc/ssl/certs/lets-encrypt-x3-cross-signed.pem
+    src: lets-encrypt-x3-cross-signed.pem
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Created chained certificate 
+  shell: cat /etc/ssl/certs/interpretthis.org.pem /etc/ssl/certs/lets-encrypt-x3-cross-signed.pem  > /etc/ssl/certs/interpretthis.org.chained.pem
+  when: interpretthis_org_challenge|changed
+  changed_when: False
+

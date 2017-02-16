@@ -39,6 +39,7 @@ def root():
 
 @app.route('/feed', methods=['GET'])
 def photofeed():
+    start, step = int(request.args.get('start', 0)), int(request.args.get('step', 3))
     response = requests.get(PHOTO_DATA_URL)
     feed = response.json()
     for photo in feed:
@@ -46,6 +47,8 @@ def photofeed():
     return render_template(
         'photofeed.html',
         feed=feed,
+        start=start,
+        step=step,
         feed_json=response.content
     )
 
