@@ -34,11 +34,20 @@ h1, h2, h3, h4, h5 {
   color: black; }
 
 .caption {
-    text-transform: uppercase;
-    margin-top: 5px; 
-    margin-bottom: 5px;
-    font-size: 80%;
-    font-family: "LeagueGothic", monospace;
+   margin-top: 0;
+   margin-bottom: 30px;
+}
+
+.caption a {
+   text-transform: uppercase;
+   text-decoration: none;
+   color: black;
+   font-size: 80%;
+   font-family: "LeagueGothic", monospace;
+}
+
+.caption a:hover {
+   text-decoration: underline;
 }
 
 .photo {

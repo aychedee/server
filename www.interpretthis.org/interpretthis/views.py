@@ -39,7 +39,6 @@ def root():
 
 @app.route('/feed', methods=['GET'])
 def photofeed():
-    start, step = int(request.args.get('start', 0)), int(request.args.get('step', 3))
     response = requests.get(PHOTO_DATA_URL)
     feed = response.json()
     for photo in feed:
@@ -47,8 +46,25 @@ def photofeed():
     return render_template(
         'photofeed.html',
         feed=feed,
-        start=start,
-        step=step,
+        start=0,
+        feed_json=response.content
+    )
+
+
+@app.route('/feed/<photo_hash>', methods=['GET'])
+def photo_in_feed(photo_hash):
+    response = requests.get(PHOTO_DATA_URL)
+    feed = response.json()
+    found_index = None
+    for i, photo in enumerate(feed):
+        photo['taken'] = datetime.strptime(photo['taken'], '%Y-%m-%d %H:%M:%S')
+        if not found_index:
+            if photo_hash in [a['path'] for a in photo['assets'].values()]:
+                found_index = i
+    return render_template(
+        'photofeed.html',
+        feed=feed,
+        start=found_index,
         feed_json=response.content
     )
 

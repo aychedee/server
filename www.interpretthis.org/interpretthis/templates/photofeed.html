@@ -6,8 +6,8 @@
     <div class="photo">
         <h1>Photo feed</h1>
     </div>
-    {% for photo in feed[:3] %}
-    <div class="photo" data-index="{{ loop.index0 }}">
+    {% for photo in feed[start:][:3] %}
+    <div class="photo" data-index="{{ loop.index0 + start }}">
         <img 
             src="https://s3.amazonaws.com/photos.interpretthis.org/{{ photo.assets['1280']['path'] }}" 
             srcset="{% for asset in photo.assets.values() %}https://s3.amazonaws.com/photos.interpretthis.org/{{ asset['path'] }} {{ asset['width'] }}w{% if not loop.last %},{% endif %}{% endfor %}" 
@@ -15,7 +15,11 @@
             alt="{{ photo.location }} @ {{ photo.taken.strftime('%-I%p %A, %-d %B %Y') }}"
             title="{{ photo.location }} @ {{ photo.taken.strftime('%-I%p %A, %-d %B %Y') }}"
         >
-        <p class="caption">{{ photo.location }} @ {{ photo.taken.strftime('%-I%p %A, %-d %B %Y') }}</p>
+        <p class="caption">
+            <a href="https://www.interpretthis.org/feed/{{ photo.assets['1280']['path'] }}">
+                {{ photo.location }} @ {{ photo.taken.strftime('%-I%p %A, %-d %B %Y') }}
+            </a>
+        </p>
     </div>
     {% endfor %}
 </div>
@@ -42,6 +46,8 @@ function appendPhoto(photo, index) {
     var div = document.createElement('div');
     var img = document.createElement('img');
     var caption = document.createElement('p');
+    var permaLink = document.createElement('a');
+
     img.src = assetUrl(photo.assets['1280'].path);
     img.srcset=buildSrcset(photo.assets);
     img.sizes = "(min-width: 1440px) 60vw, 80vw";
@@ -50,8 +56,10 @@ function appendPhoto(photo, index) {
     caption.className = 'caption';
     div.className = 'photo label'; 
     div.setAttribute('data-index', index);
-    caption.textContent = photoTitle(photo);
 
+    caption.appendChild(permaLink);
+    permaLink.href = "https://www.interpretthis.org/feed/" + photo.assets['1280'].path;
+    permaLink.textContent = photoTitle(photo);
     div.appendChild(img);
     div.appendChild(caption);
 
@@ -80,7 +88,7 @@ window.setTimeout(
     }, 500
 )
 
-var index = 2;
+var index = 2 + {{ start }};
 var feed = {{ feed_json | safe }};
 
 </script>
