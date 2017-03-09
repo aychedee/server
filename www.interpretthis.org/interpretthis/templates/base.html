@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="utf-8">
+<html lang="utf-8" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 
 <head>
     <title>{% block title %}{% endblock %} :: Interpret This</title>
@@ -11,6 +11,7 @@
     <link href="/static/interpretthis.css" rel="stylesheet" type="text/css"/>
     <link rel="alternate" type="application/rss+xml" title="Interpretthis Posts" href="/interpretthis_rss.xml" />
     <meta name="theme-color" content="#000000">
+    {% block imagepreview %}<meta property="og:image" content="" />{% endblock %}
     <script src="https://www.interpretthis.org/static/interpretthis.js"></script>
     <script src="https://www.interpretthis.org/static/moment.min.js"></script>
     <script type="text/javascript">
