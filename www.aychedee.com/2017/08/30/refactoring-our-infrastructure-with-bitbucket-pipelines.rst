@@ -95,18 +95,18 @@ These three commands give our engineers the simple tools to manage the
 environment in emergencies, test their code in the deploy process or to show
 the product team work, to get signoff, prior to it being released.
 
-*Rollback* is only there as an emergency measure. It lets an engineer quickly
+**Rollback** is only there as an emergency measure. It lets an engineer quickly
 deploy the pre-built image for a particular commit. Unlike the normal deploy
 process there is an additional sanity check performed. Which is: “Has this
 commit been successfully deployed to production before?” If that’s not the case
-we just fail. Even though `"you can’t have a rollback button" <https://blog.skyliner.io/you-cant-have-a-rollback-button-83e914f420d9>`_ this can still be
+we just fail. Even though "`you can’t have a rollback button <https://blog.skyliner.io/you-cant-have-a-rollback-button-83e914f420d9>`_" this can still be
 useful.
 
-Deploying a commit to the *staging environment* is a way for engineers to test
+Deploying a commit to the **staging environment** is a way for engineers to test
 the entire deployment process, including database migrations, before their code
 is merged into master and the automated process kicks in.
 
-Creating a *custom test environment* is the primary way for an engineer to show their
+Creating a **custom test environment** is the primary way for an engineer to show their
 work to other members of Touch Surgery. The output of running this command is a
 scaled down, isolated environment with a url unique to this commit. This gives
 ultimate flexibility. Nobody is blocked because the staging environment is
