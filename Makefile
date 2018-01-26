@@ -2,6 +2,9 @@
 deploy:
 	ansible-playbook deploy/site.yml 
 
+vpn:
+	ansible-playbook deploy/vpn.yml 
+
 clean:
 	rm -rf www.aychedee.com/_build
 

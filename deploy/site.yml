@@ -6,13 +6,12 @@
   become_user: root
   become_method: sudo
   tasks:
-    - include: common.yml
-    - include: squid.yml
-    - include: nginx.yml
-    - include: vpn.yml
-    - include: aychedee.com.yml
+    - include_tasks: common.yml
+    - include_tasks: squid.yml
+    - include_tasks: nginx.yml
+    - include_tasks: aychedee.com.yml
       tags: [aychedee]
-    - include: interpretthis.org.yml
+    - include_tasks: interpretthis.org.yml
       tags: [interpretthis]
 
   handlers:
