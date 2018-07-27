@@ -78,7 +78,7 @@
   copy:
     dest: /var/www/www.aychedee.com/static/acme-challenge/{{ aychedee_com_challenge['challenge_data']['www.aychedee.com']['http-01']['resource'].split('/')[-1] }}
     content: "{{ aychedee_com_challenge['challenge_data']['www.aychedee.com']['http-01']['resource_value'] }}"
-  when: aychedee_com_challenge|changed
+  when: aychedee_com_challenge is changed
 
 - name: Setup ssl certificate
   letsencrypt:
@@ -100,6 +100,6 @@
 
 - name: Created chained certificate 
   shell: cat /etc/ssl/certs/aychedee.com.pem /etc/ssl/certs/lets-encrypt-x3-cross-signed.pem  > /etc/ssl/certs/aychedee.com.chained.pem
-  when: aychedee_com_challenge|changed
+  when: aychedee_com_challenge is changed
   changed_when: False
 

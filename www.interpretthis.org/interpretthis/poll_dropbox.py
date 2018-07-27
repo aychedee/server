@@ -144,6 +144,11 @@ def run():
             )
         else:
             address = 'Unknown'
+
+        if not pmd.time_taken:
+            delete_on_success.append(entry.name)
+            continue
+
         taken = pmd.time_taken
         assets = {}
 

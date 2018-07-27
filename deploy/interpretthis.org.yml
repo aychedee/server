@@ -101,7 +101,7 @@
   copy:
     dest: /var/www/www.interpretthis.org/static/acme-challenge/{{ interpretthis_org_challenge['challenge_data']['www.interpretthis.org']['http-01']['resource'].split('/')[-1] }}
     content: "{{ interpretthis_org_challenge['challenge_data']['www.interpretthis.org']['http-01']['resource_value'] }}"
-  when: interpretthis_org_challenge|changed
+  when: interpretthis_org_challenge is changed
 
 - name: Setup ssl certificate
   letsencrypt:
@@ -123,6 +123,6 @@
 
 - name: Created chained certificate 
   shell: cat /etc/ssl/certs/interpretthis.org.pem /etc/ssl/certs/lets-encrypt-x3-cross-signed.pem  > /etc/ssl/certs/interpretthis.org.chained.pem
-  when: interpretthis_org_challenge|changed
+  when: interpretthis_org_challenge is changed
   changed_when: False
 
