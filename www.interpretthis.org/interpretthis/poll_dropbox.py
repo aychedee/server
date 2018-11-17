@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
 from PIL import Image
-from cStringIO import StringIO
 from datetime import datetime
-from dropbox import Dropbox, files, exceptions
+from dropbox import Dropbox, files
 from hashlib import sha1
-from pprint import pformat
 import boto3
 import io
 import json
@@ -19,9 +17,10 @@ WIDTHS = [
     1280,
     720
 ]
+
 REVERSE_GEOCODE_URL = (
-    'http://maps.googleapis.com'
-    '/maps/api/geocode/json?latlng={lat},{lon}'
+    'https://maps.googleapis.com/maps/api/geocode/json'
+    '?latlng={lat},{lon}&key={key}'
 )
 
 PHOTO_DATA_URL = (
@@ -82,7 +81,8 @@ class Photo(object):
 
 
 def get_best_address(lat, lon):
-    for address in requests.get(REVERSE_GEOCODE_URL.format(lat=lat, lon=lon)).json()['results']:
+    geo_coding_url = REVERSE_GEOCODE_URL.format(lat=lat, lon=lon, key=os.environ['GOOGLE_API_KEY'])
+    for address in requests.get(geo_coding_url).json()['results']:
         if 'postal_code' in address['types']:
             return address['formatted_address']
 
