@@ -87,8 +87,9 @@
       creates: /etc/ssl/private/interpretthis.org.account.key
 
 - name: Get challenge information from letsencrypt
-  letsencrypt:
-    acme_directory: https://acme-v01.api.letsencrypt.org/directory
+  acme_certificate:
+    acme_version: 2
+    acme_directory: https://acme-v02.api.letsencrypt.org/directory
     account_key: /etc/ssl/private/interpretthis.org.account.key
     csr: /etc/ssl/csr/interpretthis.org.csr
     dest: /etc/ssl/certs/interpretthis.org.pem
@@ -104,8 +105,9 @@
   when: interpretthis_org_challenge is changed
 
 - name: Setup ssl certificate
-  letsencrypt:
-    acme_directory: https://acme-v01.api.letsencrypt.org/directory
+  acme_certificate:
+    acme_version: 2
+    acme_directory: https://acme-v02.api.letsencrypt.org/directory
     account_key: /etc/ssl/private/interpretthis.org.account.key
     csr: /etc/ssl/csr/interpretthis.org.csr
     dest: /etc/ssl/certs/interpretthis.org.pem
@@ -116,7 +118,7 @@
 - name: Put letsencrypts certificate chain into place
   file: 
     dest: /etc/ssl/certs/lets-encrypt-x3-cross-signed.pem
-    src: lets-encrypt-x3-cross-signed.pem
+    src: /home/ubuntu/lets-encrypt-x3-cross-signed.pem
     mode: 0644
     owner: root
     group: root
