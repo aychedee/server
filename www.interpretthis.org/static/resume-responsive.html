@@ -13,7 +13,7 @@
     <meta content="vim" name="GENERATOR" />
 
     <meta content="Hansel Dunlop" name="author" />
-    <meta content="Hansel Dunlop 2013" name="copyright" />
+    <meta content="Hansel Dunlop 2022" name="copyright" />
     <meta content="all" name="robots" />
 
     <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -57,8 +57,15 @@
         display: inline-block;
     }
 
+
     .credits {
         font-size: 70%;
+    }
+
+    @media print {
+        .pagebreak {
+            page-break-before: always;
+        }
     }
 
 
@@ -109,7 +116,7 @@
 </ul>
 
 
-<h2>Previous Experience</h2>
+<h2 class="pagebreak">Previous Experience</h2>
 <div class="divider"></div>
 
 <h5>February 2017 - February 2020<br />London, UK</h5>
@@ -404,7 +411,7 @@ Achieved an A Bursary and the highest English mark at the College for 1997.
 
 <p class="credits" style="text-align: center;">
     This document - html 5 &mdash;
-    &copy; Hansel Dunlop 2014.
+    &copy; Hansel Dunlop 2022.
 </p>
 
 </div>
